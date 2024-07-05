@@ -1,25 +1,31 @@
 import numpy as np
 import pandas as pd
 
+
 def convert_to_string(df, columns):
     for col in columns:
         df[col] = df[col].astype("string")
+
 
 def convert_to_numeric(df, columns):
     for col in columns:
         df[col] = pd.to_numeric(df[col])
 
+
 def convert_to_int(df, columns):
     for col in columns:
         df[col] = df[col].astype("int64")
+
 
 def convert_to_datetime(df, columns):
     for col in columns:
         df[col] = pd.to_datetime(df[col])
 
+
 def multiply_by_factor(df, columns, factor):
     for col in columns:
         df[col] = df[col] * factor
+
 
 def show_cols_mixed_dtypes(df):
     mixed_dtypes = {'Column': [], 'Data type': []}
@@ -32,6 +38,7 @@ def show_cols_mixed_dtypes(df):
         print('None of the columns contain mixed types.')
     else:
         print(pd.DataFrame(mixed_dtypes))
+
 
 def percent_missing_values(df):
 
@@ -47,6 +54,7 @@ def percent_missing_values(df):
     # Calculate percentage of missing values
     print("The dataset contains", round(((totalMissing/totalCells) * 100), 2), "%", "missing values.")
 
+
 def count_missing_rows(df):
 
     # Calculate total number rows with missing values
@@ -57,6 +65,7 @@ def count_missing_rows(df):
 
     # Calculate the percentage of missing rows
     print(f"{missing_rows} rows({round(((missing_rows/total_rows) * 100), 2)}%) contain atleast one missing value.")
+
 
 # Function to calculate missing values by column
 def missing_values_table(df):
@@ -91,6 +100,7 @@ def missing_values_table(df):
 
     # Return the dataframe with missing information
     return mis_val_table_ren_columns
+
 
 def fix_missing_ffill(df, cols):
     for col in cols:
@@ -130,12 +140,14 @@ def fix_missing_ffill_bfill(df, cols):
         print(f"{count} missing values in the column {col} have been replaced \
             first by the forward fill then by the backward fill methods.")
 
+
 def fix_missing_median(df, cols):
     for col in cols:
         median = df[col].median()
         count = df[col].isna().sum()
         df[col] = df[col].fillna(median)
         print(f"{count} missing values in the column {col} have been replaced by its median value {median}.")
+
 
 def fix_missing_mode(df, cols):
     for col in cols:
@@ -147,6 +159,7 @@ def fix_missing_mode(df, cols):
         else:
             print(f"{count} missing values in the column {col} have been replaced by its mode value {mode}.")
 
+
 def fix_missing_value(df, cols, value):
     for col in cols:
         count = df[col].isna().sum()
@@ -155,6 +168,7 @@ def fix_missing_value(df, cols, value):
             print(f"{count} missing values in the column {col} have been replaced by \'{value}\'.")
         else:
             print(f"{count} missing values in the column {col} have been replaced by {value}.")
+
 
 def drop_duplicates(df):
     old = df.shape[0]
@@ -166,12 +180,14 @@ def drop_duplicates(df):
     else:
         print(f"{count} duplicate rows were found and removed.")
 
+
 def drop_rows_with_missing_values(df):
     old = df.shape[0]
     df.dropna(inplace=True)
     new = df.shape[0]
     count = old - new
     print(f"{count} rows containg missing values were dropped.")
+
 
 def drop_columns(df, columns):
     df.drop(columns, axis=1, inplace=True)

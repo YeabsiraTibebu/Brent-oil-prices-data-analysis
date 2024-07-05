@@ -5,7 +5,8 @@ from time import gmtime, strftime
 from app_logger import App_Logger
 from config import Config
 
-class FileHandler():
+
+class FileHandler:
 
     def __init__(self):
         # self.logger = App_Logger().get_logger(__name__)
